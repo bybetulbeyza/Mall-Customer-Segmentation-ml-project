@@ -38,6 +38,9 @@ kmeans=KMeans(n_clusters=5,random_state=42)
 kmeans.fit(X)
 y_kmeans=kmeans.predict(X)
 
+df['Müşteri_segmenti']=y_kmeans
+print(df.head())
+
 #model goresellestirme
 plt.figure(figsize=(12, 8))
 plt.scatter(X[y_kmeans == 0, 0], X[y_kmeans == 0, 1], s=100, c='red', label='Orta Gelir, Orta Harcama')
@@ -48,6 +51,7 @@ plt.scatter(X[y_kmeans == 4, 0], X[y_kmeans == 4, 1], s=100, c='yellow', label='
 plt.title('Müşteri Grupları (Segmentasyon)')
 plt.xlabel('Yıllık Gelir (k$)')
 plt.ylabel('Harcama Skoru (1-100)')
+plt.scatter(kmeans.cluster_centers_[:,0],kmeans.cluster_centers_[:,1],s=300,c='black',label='merkezler',marker='.')
 plt.grid(True, alpha=0.3)#izgara eklemek icin 
 plt.legend()
 plt.show()
